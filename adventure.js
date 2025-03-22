@@ -30,6 +30,8 @@ class Character {
     const result = Math.floor(Math.random() * 20) + 1 + mod;
     console.log(`${this.name} rolled a ${result}.`);
   }
+  static MAX_HEALTH = 100; //Add a static MAX_HEALTH property to the Character class, equal to 100.
+  static ROLES = ["Fighter", "Healer", "Wizard", "Archer"]; // Add a static ROLES array to the Adventurer class, with the values “Fighter,” “Healer,” and “Wizard.” Feel free to add other roles, if you desire!
 }
 
 // const robin = new Character("Robin");
@@ -49,7 +51,14 @@ class Character {
 class Adventurer extends Character {
   constructor(name, role, catchphrase) {
     super(name);
-    this.role = role;
+    if (Character.ROLES.includes(role)) {
+      //Add a check to the constructor of the Adventurer class that ensures the given role matches one of these values.
+      this.role = role;
+    } else {
+      console.log(
+        `Invalid role "${role}". Please choose from: ${Character.ROLES}`
+      );
+    }
     this.inventory.push("bedroll", "50 gold coins");
     this.catchphrase = catchphrase;
   }
@@ -85,8 +94,42 @@ robin.companion = new Companion("Leo", "Cat");
 robin.companion.companion = new Companion("Frank", "Flea");
 robin.companion.companion.inventory.push("small hat", "sunglasses");
 
-robin.specialAttack();
-robin.companion.bite();
-robin.companion.companion.bite();
+// robin.specialAttack();
+// robin.companion.bite();
+// robin.companion.companion.bite();
 
 //part 4
+
+// // Add a static MAX_HEALTH property to the Character class, equal to 100.
+// Add a static ROLES array to the Adventurer class, with the values “Fighter,” “Healer,” and “Wizard.” Feel free to add other roles, if you desire!
+// Add a check to the constructor of the Adventurer class that ensures the given role matches one of these values.
+
+const soveliss = new Adventurer("Soveliss", "Archer", "Bullseye!");
+
+//part 5
+
+class AdventurerFactory {
+  constructor(role) {
+    this.role = role;
+    this.adventurers = [];
+  }
+  generate(name, catchphrase) {
+    const newAdventurer = new Adventurer(name, this.role, catchphrase);
+    this.adventurers.push(newAdventurer);
+  }
+  findByIndex(index) {
+    return this.adventurers[index];
+  }
+  findByName(name) {
+    return this.adventurers.find((a) => a.name === name);
+  }
+}
+
+const healers = new AdventurerFactory("Healer");
+const shadowheart = healers.generate(
+  "Shadowheart",
+  "Someone called for a doctor?"
+);
+console.log(shadowheart);
+console.log(AdventurerFactory.adventurers);
+console.log(healers);
