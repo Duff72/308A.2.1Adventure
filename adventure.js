@@ -70,6 +70,28 @@ class Adventurer extends Character {
     console.log(`${this.name} attacks and says "${this.catchphrase}"`);
     super.roll(5);
   }
+  duel(adventurer) {
+    console.log(this.health);
+    console.log(adventurer.health);
+    this.roll();
+    adventurer.roll();
+    while (this.health > 50 && adventurer.health > 50) {
+      //hdoufhgidfgnh it not working
+      // sofhndfiuhndfhnsdgkoldfgindfh
+      // sodigdofihodfingdfogn
+      if (adventurer.roll > this.roll) {
+        this.roll();
+        adventurer.roll();
+        this.health--;
+        console.log(this.health);
+      } else if (adventurer.roll < this.roll) {
+        this.roll();
+        adventurer.roll();
+        adventurer.health--;
+        console.log(adventurer.health);
+      }
+    }
+  }
 }
 
 class Companion extends Character {
@@ -130,6 +152,20 @@ const shadowheart = healers.generate(
   "Shadowheart",
   "Someone called for a doctor?"
 );
-console.log(shadowheart);
-console.log(AdventurerFactory.adventurers);
-console.log(healers);
+// console.log(shadowheart);
+// console.log(AdventurerFactory.adventurers);
+// console.log(healers);
+
+// part 6
+
+// Create an additional method, duel(), for the Adventurer class with the following functionality:
+// Accept an Adventurer as a parameter.
+// Use the roll() functionality to create opposing rolls for each adventurer.
+// Subtract 1 from the adventurer with the lower roll.
+// Log the results of this “round” of the duel, including the rolls and current health values.
+// Repeat this process until one of the two adventurers reaches 50 health.
+// Log the winner of the duel: the adventurer still above 50 health.
+
+soveliss.duel(robin);
+// console.log(soveliss.health);
+// console.log(robin.health);
