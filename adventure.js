@@ -71,28 +71,35 @@ class Adventurer extends Character {
     super.roll(5);
   }
   duel(adventurer) {
-    console.log(this.health);
-    console.log(adventurer.health);
-    this.roll();
-    adventurer.roll();
-    while (this.health > 50 && adventurer.health > 50) {
-      //hdoufhgidfgnh it not working
-      // sofhndfiuhndfhnsdgkoldfgindfh
-      // sodigdofihodfingdfogn
-      if (adventurer.roll > this.roll) {
-        this.roll();
-        adventurer.roll();
-        this.health--;
-        console.log(this.health);
-      } else if (adventurer.roll < this.roll) {
-        this.roll();
-        adventurer.roll();
-        adventurer.health--;
-        console.log(adventurer.health);
+    let z = this.health;
+    let x = adventurer.health;
+    while (z > 50 && x > 50) {
+      let a = this.roll();
+      let b = adventurer.roll();
+      if (b > a) {
+        z--;
+        console.log(
+          `${adventurer.name} wins the round. ${this.name} has ${this.health} health remaining.`
+        );
+        duel(adventurer);
+      } else if (a <= b) {
+        x--;
+        console.log(
+          `${this.name} wins the round. ${adventurer.name} has ${adventurer.health} health remaining.`
+        );
+        duel(adventurer);
       }
+      // } else if (this.health <= 50) {
+      //   console.log(`${adventurer.name} has won the duel!`);
+      // } else {
+      //   console.log(`${this.name} has won the duel!`);
+      // }
     }
   }
 }
+
+// can't figure out duel. it either runs forever or it runs twice then stops. I have no idea why. I'm submitting what I have and I'll ask for help in office hours.
+// super frustrating. I've tried so many things.
 
 class Companion extends Character {
   constructor(name, type) {
